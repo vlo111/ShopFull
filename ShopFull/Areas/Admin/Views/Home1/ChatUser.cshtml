@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "ChatUser";
+}
+
+<h2 style="text-align:center">Chat-Room</h2>
+<div style="text-align:center">
+    <div class="main">
+        <div id="loginBlock">
+            <br />
+            <input id="txtUserName" hidden="hidden" type="text" value=@Session["AdminLogin"] />
+            <input id="btnLogin" type="button" value="Signin Chat" />
+        </div>
+
+        <div id="chatBody" style="align-items:center">
+            <div id="header"></div>
+            <div id="inputForm">
+                <input type="text" id="message" />
+                <input type="button" id="sendmessage" value="Отправить" />
+            </div>
+            <div id="chatroom"></div>
+
+            <div id="chatusers">
+                <p><b>All Users</b></p>
+            </div>
+        </div>
+        <input id="hdId" type="hidden" />
+        <input id="username" type="hidden" />
+    </div>
+</div>
+<script src="~/Scripts/jquery-1.6.4.min.js"></script>
+<!--Ссылка на библиотеку SignalR -->
+<script src="~/Scripts/jquery.signalR-2.2.1.min.js"></script>
+<!--Ссылка на автоматически сгенерированный скрипт хаба SignalR -->
+<script src="~/signalr/hubs"></script>
+<script src="~/Content/js/util.js"></script>
+

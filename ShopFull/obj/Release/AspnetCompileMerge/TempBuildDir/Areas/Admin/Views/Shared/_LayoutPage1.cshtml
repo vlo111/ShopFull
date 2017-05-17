@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title - Admin</title>
+
+    <link rel="icon" href="~/favicon.ico" />
+
+    <link href="~/Areas/Admin/Content/css/atlas.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/css/bars.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/css/bootstrap-markdown.min.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/css/chocolat.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/css/clndr.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/css/fabochart.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/css/font-awesome.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/css/icon-font.min.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/css/jqvmap.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/css/popuo-box.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/css/style.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/css/vroom.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/css/menu.css" rel="stylesheet" />
+</head>
+<body>
+    <div style="padding-top:2em; text-align:center" class="menu">
+        @{
+            if (Session["AdminLogin"] == null)
+            {
+                Response.Redirect("/Admin/Login/Index");
+            }
+        }
+        <ul id="dc_mega-menu-orange" class="dc_mm-orange">
+            <li>@Html.ActionLink("Products", actionName: "Index", controllerName: "Products")</li>
+            <li>@Html.ActionLink("Categories", actionName: "Index", controllerName: "Categories")</li>
+            <li>@Html.ActionLink("Accounts", actionName: "Index", controllerName: "Accounts")</li>
+            <li>@Html.ActionLink("Contacts", actionName: "Index", controllerName: "Contacts")</li>
+            <li>@Html.ActionLink("Admin", actionName: "Index", controllerName: "AdminPanels")</li>
+            <li>@Html.ActionLink("Chat", actionName: "ChatUser", controllerName: "Home1")</li>
+            <li><a href="~/Home/Index">Profile</a></li>
+            <div class="clear" />
+        </ul>
+    </div>
+    <div >
+        @RenderBody()
+    </div>
+</body>
+</html>

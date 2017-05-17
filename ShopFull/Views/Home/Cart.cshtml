@@ -1,0 +1,153 @@
+﻿@using ShopFull.Models
+@model IEnumerable<ShopFull.Models.Cart>
+@{
+    ViewBag.Title = "Cart";
+}
+
+<div class="main">
+    <div class="content">
+        <div class="cartoption">
+            <div class="cartpage">
+                <h2>Your Cart</h2>
+
+                <table class="tblone">
+                    <tr>
+                        <th width="20%">Product Name</th>
+                        <th width="10%">Image</th>
+                        <th width="15%">Price</th>
+                        <th width="25%">Quantity</th>
+                        <th width="20%">Total Price</th>
+                        <th width="10%">Action</th>
+                    </tr>
+                    @{
+
+                        foreach (var item in Model)
+                        {
+
+                            if (Session["UserID"] != null && item.accauntId == (int)Session["UserID"])
+                            {
+                                <tr>
+                                    <td>@item.ProductName</td>
+                                    <td><img src=@item.Image alt="" /></td>
+                                    <td>$@item.Price</td>
+                                    <td>
+                                        @using (Html.BeginForm("CartUpdate", "Home"))
+                                        {
+                                            <input type="text" hidden="hidden" name="id" value="@item.Id" />
+                                            <input type="number" name="quantity" value="@item.Quantity" />
+                                            <input type="submit" name="submit" value="Update" />
+                                        }
+                                    </td>
+                                    <td>$@item.TotalPrice</td>
+                                    <td>
+                                        @using (Html.BeginForm("CartDelete", "Home"))
+                                        {
+                                            <input type="text" hidden="hidden" name="id" value="@item.Id" />
+
+                                            <input type="submit" name="submit" value="Delete" />
+                                        }
+                                    </td>
+                                </tr>
+                            }
+
+                        }
+
+
+                    }
+                </table>
+                <table style="float:right;text-align:left; width:40%">
+                    @{
+                        double subTotal = 0;
+                        double vat = 0;
+                        double grandTotal = 0;
+                        foreach (var item in Model)
+                        {
+                            if (Session["UserID"] != null && item.accauntId == (int)Session["UserID"])
+                            {
+                                subTotal += (double)item.TotalPrice;
+                                vat = subTotal * 20 / 100;
+                                grandTotal = subTotal + vat;
+                            }
+                        }
+                        ViewBag.grandTotal = grandTotal;
+                        <tr>
+                            <th>Sub Total : </th>
+                            <td>TK. @subTotal</td>
+                        </tr>
+                        <tr>
+                            <th>VAT : </th>
+                            <td>TK. @vat</td>
+                        </tr>
+                        <tr>
+                            <th>Grand Total :</th>
+                            <td>
+                                TK. @grandTotal
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+            <div class="shopping">
+                <div class="shopleft">
+                    <a href="@Url.Action("Index", "Home")"><img src="~/Content/images/shop.png" alt="" /></a>
+                </div>
+                <div class="shopright">
+
+                    @{
+                        string prodName = null;
+                        if (Session["UserID"] != null)
+                        {
+
+                            foreach (var item in Model)
+                            {
+                                if (item.accauntId == (int)Session["UserID"])
+                                {
+                                    prodName += item.ProductName + ",";
+                                }
+                            }
+                            if (prodName != null)
+                            {
+                                prodName = prodName.Substring(0, prodName.Length - 1);
+                            }
+
+                            <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" id="cardForm">
+                                <input name="cmd" type="hidden" value="_xclick">
+                                <input name="business" type="hidden" value="vardanyan.valod@list.ru">
+
+                                <input name="item_name" type="hidden" value=@prodName>
+                                <input name="amount" type="hidden" value=@grandTotal>
+                                <input id="checkout" type="image" src="~/Content/images/check.png" alt="" style="height:90px;width:300px" onclick="testfunction()" />
+
+                            </form>
+                            {
+                                double grandTotalVisa = grandTotal * 100;
+                            }
+                                <form action="@Url.Action("Cart","Home")" method="get">
+                                    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                            data-key="pk_test_MWwVIUOA0HQ1rTFwPWU8ENtC"
+                                            data-amount=@grandTotal
+                                            data-name="Shop"
+                                            data-description=@prodName
+                                            data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                                            data-locale="auto">
+                                    </script>
+                                </form>
+    }
+    else
+    {
+        <a href="@Url.Action("Login", "Home")"><img src="~/Content/images/check.png" alt="" /></a>
+    }
+
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var testurl = "@Url.Action("CartDeleteOnClickCheckOut","Home")";
+</script>
+@Scripts.Render("~/Content/js/test.js")

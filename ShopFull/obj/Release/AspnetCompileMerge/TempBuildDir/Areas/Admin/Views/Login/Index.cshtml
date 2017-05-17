@@ -1,0 +1,61 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Admin - Login</title>
+    <link href="~/Areas/Admin/Content/css/atlas.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/css/bars.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/css/bootstrap-markdown.min.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/css/chocolat.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/css/clndr.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/css/fabochart.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/css/font-awesome.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/css/icon-font.min.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/css/jqvmap.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/css/popuo-box.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/css/style.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/css/vroom.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/css/menu.css" rel="stylesheet" />
+</head>
+<body>
+        <div class="error_page">
+            <div class="error-top">
+                <h2 class="inner-tittle page">Augment</h2>
+                <div class="login">
+                    <h3 class="inner-tittle t-inner">Login</h3>
+                    <div class="buttons login">
+                    </div>
+                    <form method="post">
+                        <input type="text" name="Login" class="text" placeholder="Login">
+                        <span><label id="valid" style="color:red">@ViewBag.ValidLogin</label> </span>
+                        <input type="password" name="Password" placeholder="Password">
+                        <span><label id="valid" style="color:red">@ViewBag.ValidPassword</label> </span>
+                        <div class="submit"><input type="submit" onclick="myFunction()" value="Login"></div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+
+
+            </div>
+
+        </div>
+    <div class="footer">
+        <div class="error-btn">
+            <a class="read fourth" href="~/Home/Index">Return to Profile</a>
+        </div>
+        <p>&copy 2016 <a href="~/Home/Index" target="_blank">Shop.</a>. Admin | Login </p>
+    </div>
+
+    <script src="~/Areas/Admin/Content/js/jquery.nicescroll.js"></script>
+    <script src="~/Areas/Admin/Content/js/scripts.js"></script>
+    <script src="~/Areas/Admin/Content/js/bootstrap.min.js"></script>
+
+</body>
+</html>

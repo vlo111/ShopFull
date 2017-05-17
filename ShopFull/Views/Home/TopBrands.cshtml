@@ -1,0 +1,81 @@
+﻿@model IEnumerable<ShopFull.Models.Product>
+
+@{
+    ViewBag.Title = "TopBrands";
+}
+
+<div class="main">
+    <div class="content">
+        <div class="content_top">
+            <div class="heading">
+                <h3>Acer</h3>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="section group">
+            @{
+                var queryTopBrandsAcer = from p in Model
+                                     where p.TopBrands == "Acer"
+                                     select p;
+                foreach (var item in queryTopBrandsAcer)
+                {
+                    <div class="grid_1_of_4 images_1_of_4">
+                        <a href="@Url.Action("Preview", "Home", new {id = item.Id })"><img src=@item.Image alt="" /></a>
+
+                        <h2>@item.Title </h2>
+                        <p>@item.Description</p>
+                        <p><span class="price">$@item.Price</span></p>
+                        <div class="button"><span><a href="@Url.Action("Preview","Home",new { id=item.Id})" class="details">Details</a></span></div>
+                    </div>
+
+                }
+            }
+        </div>
+        <div class="content_bottom">
+            <div class="heading">
+                <h3>Samsung</h3>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="section group">
+            @{
+                var queryTopBrandsSamsung = from p in Model
+                                     where p.TopBrands == "Samsung"
+                                     select p;
+                foreach (var item in queryTopBrandsSamsung)
+                {
+                    <div class="grid_1_of_4 images_1_of_4">
+                        <a href="@Url.Action("Preview", "Home")"><img src=@item.Image alt="" /></a>
+                        <h2>@item.Title </h2>
+                        <p><span class="price">$@item.Price</span></p>
+                        <div class="button"><span><a href="@Url.Action("Preview","Home",new { id=item.Id})" class="details">Details</a></span></div>
+                    </div>
+
+                }
+            }
+        </div>
+        <div class="content_bottom">
+            <div class="heading">
+                <h3>Canon</h3>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="section group">
+            @{
+                var queryTopBrandsCanon = from p in Model
+                                            where p.TopBrands == "Canon"
+                                            select p;
+                foreach (var item in queryTopBrandsCanon)
+                {
+                    <div class="grid_1_of_4 images_1_of_4">
+                        <a href="@Url.Action("Preview", "Home", new {id = item.Id })"><img src=@item.Image alt="" /></a>
+                        <h2>@item.Title </h2>
+                        <p><span class="price">$@item.Price</span></p>
+                        <div class="button"><span><a href="@Url.Action("Preview","Home",new { id=item.Id})" class="details">Details</a></span></div>
+                    </div>
+
+                }
+            }
+        </div>
+    </div>
+</div>

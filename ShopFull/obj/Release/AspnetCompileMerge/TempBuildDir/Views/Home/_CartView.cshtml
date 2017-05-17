@@ -1,0 +1,29 @@
+﻿@using ShopFull.Models
+<div class="shopping_cart">
+    <div class="cart">
+        <a href="@Url.Action("Cart","Home")" title="View my shopping cart" rel="nofollow">
+            <span class="cart_title">Cart</span>
+            @{
+                int? userId = (int?)Session["UserID"];
+                int count = 0;
+                if (userId != null)
+                {
+                    var db = new ShopDBEntities();
+                    foreach (var item in db.Carts)
+                    {
+                        count += (int)item.Quantity;
+                    }
+
+                    <span class="no_product">(@count)</span>
+                }
+                else
+                {
+                    <span class="no_product">(empty)</span>
+                }
+                
+            }
+
+        </a>
+    </div>
+</div>
+

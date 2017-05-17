@@ -1,0 +1,25 @@
+﻿@using ShopFull.Models
+@{
+    var db = new ShopDBEntities();
+    string prodName = null;
+    foreach (var item in db.Carts)
+    {
+        if (item.accauntId == (int)Session["UserID"])
+        {
+            prodName += item.ProductName + ",";
+        }
+    }
+    if (prodName != null)
+    {
+        prodName = prodName.Substring(0, prodName.Length - 1);
+    }
+
+}
+
+<form id="checkout" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="get">
+    <input name="cmd" type="hidden" value="_xclick">
+    <input name="business" type="hidden" value="aghasim@yandex.ru">
+
+    <input name="item_name" type="hidden" value=@prodName>
+    <input name="amount" type="hidden" value=@ViewBag.grandTotal>
+</form>
